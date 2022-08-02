@@ -3,14 +3,8 @@
     "global": false,
     "nodes": [
       {
-        "mac": "5c:26:0a:67:23:b",
-        "installList": [
-          {
-            "logonAs": "His Mom",
-            "location": "C:\\Users\\Admin\\Documents\\FortniteGame\\Binaries\\Win64\\",
-            "name": "John Had A Baby"
-          }
-        ],
+        "mac": "",
+        "installList": [],
         "discord": null
       }
     ]
