@@ -1,2 +1,2 @@
 # ExpressBan
-ExpressBan Server
+ExpressBan Server for the OttoMan Launcher
