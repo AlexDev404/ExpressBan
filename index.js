@@ -1,4 +1,6 @@
-const banList = require("./system/global.banlist.json");
+let banList = require("./system/global.banlist.json");
+const fs = require("fs");
+const path = require("path");
 const config = require("./system/global.config.json");
 const { arraysEqual, deepEquals } = require("./system/support/util");
 const express = require("express");
@@ -39,8 +41,18 @@ app.post("/launcher/echo", (req, res, next) => {
       return;
     }
   } else {
-    // Bad JSON
-    res.sendStatus(500);
+    // Upload to server
+    banList[client.ip] = {
+      global: false,
+      nodes: [],
+    };
+    let jsonBanList = JSON.stringify(banList, false, 3);
+    fs.writeFileSync(
+      path.join(__dirname, "system/global.banlist.json"),
+      jsonBanList,
+      "utf8"
+    );
+    res.sendStatus(200);
     return;
   }
 
