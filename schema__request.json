@@ -1,0 +1,33 @@
+{
+    "activity_state": "ACTIVE",
+    "lastState": "index.html",
+    "ip": "190.197.56.65",
+    "provinceDetails": {
+        "status": "success",
+        "country": "Belize",
+        "countryCode": "BZ",
+        "region": "BZ",
+        "regionName": "Belize District",
+        "city": "Belize City",
+        "zip": "",
+        "lat": 17.5077,
+        "lon": -88.1942,
+        "timezone": "America/Belize",
+        "isp": "Belize Telemedia Limited",
+        "org": "Breezemax Reserved",
+        "as": "AS10269 Belize Telemedia Limited",
+        "query": "190.197.56.65"
+    },
+    "os": "win32",
+    "arch": "x64",
+    "mac": "5c:26:0a:67:23:ba",
+    "uploadTime": "2022-08-02T02:06:59.017Z",
+    "installs": [
+        {
+            "logonAs": "His Mom",
+            "location": "C:\\Users\\Admin\\Documents\\FortniteGame\\Binaries\\Win64\\",
+            "name": "John Had A Baby"
+        }
+    ],
+    "version": "1.0.0"
+}

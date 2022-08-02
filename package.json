@@ -1,0 +1,24 @@
+{
+  "name": "expressban",
+  "version": "1.0.0",
+  "description": "ExpressBan Server for the OttoMan Launcher",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon ./index.js",
+    "start": "node ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/voltaicfn/expressban.git"
+  },
+  "author": " (c)",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/voltaicfn/expressban/issues"
+  },
+  "homepage": "https://github.com/voltaicfn/expressban#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "nodemon": "^2.0.19"
+  }
+}
