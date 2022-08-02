@@ -126,11 +126,12 @@ app.post("/launcher/echo", (req, res, next) => {
     }
   });
 
-  if (!slipShot) {
+  if (slipShot) {
     // We need an update
     res.sendStatus(503);
     return;
   } else {
+    // We don't need an update
     res.sendStatus(200);
     return;
   }
