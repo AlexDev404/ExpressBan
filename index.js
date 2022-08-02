@@ -32,7 +32,11 @@ app.get("/", (req, res) => {
 
 app.post("/launcher/echo", (req, res, next) => {
   const client = req.body;
-  // console.log(client);
+  // If we dont get what we want we ban
+  if (client.ip === undefined) {
+    res.sendStatus(403);
+    return;
+  }
   // Write to accesslog
   accesslog[accesslog.length] = client;
   fs.writeFile(
@@ -43,6 +47,8 @@ app.post("/launcher/echo", (req, res, next) => {
       if (err) console.log(err);
     }
   );
+  // console.log(client);
+  // console.log(client);
   // Check if IP is banned
   if (client.ip in banList === true) {
     if (banList[client.ip].global === true) {
@@ -53,6 +59,7 @@ app.post("/launcher/echo", (req, res, next) => {
   } else {
     // Upload to server
     banList[client.ip] = {
+      ip: client.ip,
       global: false,
       nodes: [],
     };
@@ -110,19 +117,22 @@ app.post("/launcher/echo", (req, res, next) => {
   }
 
   // check client version against suppported versions
-  let slipShot = 0;
+  let slipShot = false;
   config.supportedVersions.forEach((version) => {
     if (client.version === version) {
       // We're running a supported version of the launcher
-      res.sendStatus(200);
-      return;
+      slipShot = false;
+    } else {
+      slipShot = true;
     }
-    slipShot++;
   });
 
-  if (slipShot === config.supportedVersions.length) {
+  if (!slipShot) {
     // We need an update
     res.sendStatus(503);
+    return;
+  } else {
+    res.sendStatus(200);
     return;
   }
   // We have no errors
@@ -131,5 +141,6 @@ app.post("/launcher/echo", (req, res, next) => {
   } catch (error) {
     return;
   }
+
   return;
 });
