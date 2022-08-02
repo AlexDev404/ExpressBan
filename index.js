@@ -1,4 +1,5 @@
 let banList = require("./system/global.banlist.json");
+let accesslog = require("./system/system.accesslog.json");
 const fs = require("fs");
 const path = require("path");
 const config = require("./system/global.config.json");
@@ -32,7 +33,16 @@ app.get("/", (req, res) => {
 app.post("/launcher/echo", (req, res, next) => {
   const client = req.body;
   // console.log(client);
-
+  // Write to accesslog
+  accesslog[accesslog.length] = client;
+  fs.writeFile(
+    path.join(__dirname, "system/system.accesslog.json"),
+    JSON.stringify(accesslog, false, 3),
+    "utf8",
+    (err) => {
+      if (err) console.log(err);
+    }
+  );
   // Check if IP is banned
   if (client.ip in banList === true) {
     if (banList[client.ip].global === true) {
@@ -116,6 +126,10 @@ app.post("/launcher/echo", (req, res, next) => {
     return;
   }
   // We have no errors
-  res.sendStatus(200);
+  try {
+    res.sendStatus(200);
+  } catch (error) {
+    return;
+  }
   return;
 });
