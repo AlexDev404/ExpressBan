@@ -2,6 +2,7 @@ let banList = require("./system/global.banlist.json");
 let accesslog = require("./system/system.accesslog.json");
 const fs = require("fs");
 const path = require("path");
+const OTPAuth = require("otpauth");
 const config = require("./system/global.config.json");
 const { arraysEqual, deepEquals } = require("./system/support/util");
 const express = require("express");
@@ -32,6 +33,20 @@ app.get("/", (req, res) => {
 
 app.post("/launcher/echo", (req, res, next) => {
   const client = req.body;
+
+  // Guard keygen
+
+  // Create a new TOTP object.
+  let totp = new OTPAuth.TOTP({
+    algorithm: "SHA1",
+    digits: 6,
+    period: 30,
+    secret: config.secret,
+  });
+
+  // Generate a token.
+  let guardToken = totp.generate();
+
   // If we dont get what we want we ban
   if (client.ip === undefined) {
     res.sendStatus(403);
@@ -132,7 +147,7 @@ app.post("/launcher/echo", (req, res, next) => {
     return;
   } else {
     // We don't need an update
-    res.sendStatus(200);
+    res.send({ guard: guardToken });
     return;
   }
   // We have no errors

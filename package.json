@@ -19,6 +19,7 @@
   "homepage": "https://github.com/voltaicfn/expressban#readme",
   "dependencies": {
     "express": "^4.18.1",
-    "nodemon": "^2.0.19"
+    "nodemon": "^2.0.19",
+    "otpauth": "^8.0.1"
   }
 }
