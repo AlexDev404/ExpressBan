@@ -59,7 +59,6 @@ app.post("/launcher/echo", (req, res, next) => {
   } else {
     // Upload to server
     banList[client.ip] = {
-      ip: client.ip,
       global: false,
       nodes: [],
     };
